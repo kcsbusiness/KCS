@@ -3,6 +3,7 @@
    ───────────────────────────────────────── */
 
 'use strict';
+emailjs.init("CxWSPfjkIq1fEhj6f");
 
 /* ── STICKY HEADER ── */
 const header = document.getElementById('header');
@@ -151,21 +152,36 @@ function validateBookingForm() {
 }
 
 if (bookingForm) {
-  bookingForm.addEventListener('submit', (e) => {
+  bookingForm.addEventListener('submit', function(e) {
     e.preventDefault();
+
     if (!validateBookingForm()) return;
 
-    // Simulate submission
     const btn = bookingForm.querySelector('button[type="submit"]');
-    btn.textContent = 'Submitting…';
+    btn.textContent = 'Sending...';
     btn.disabled = true;
 
-    setTimeout(() => {
-      bookingForm.style.display = 'none';
-      bookingSuccess.style.display = 'flex';
-      bookingSuccess.style.flexDirection = 'column';
-      bookingSuccess.style.alignItems = 'center';
-    }, 900);
+    const data = {
+      fname: document.getElementById('fname').value,
+      email: document.getElementById('email').value,
+      phone: document.getElementById('phone').value,
+      mdate: document.getElementById('mdate').value,
+      mtime: document.getElementById('mtime').value,
+      mtype: document.getElementById('mtype').value,
+      notes: document.getElementById('notes').value
+    };
+
+    emailjs.send("kcsbusiness", "template_hwjx609", data)
+      .then(() => {
+        bookingForm.style.display = 'none';
+        bookingSuccess.style.display = 'flex';
+      })
+      .catch((error) => {
+        console.error(error);
+        alert("Failed to send. Try again.");
+        btn.textContent = 'Request Consultation';
+        btn.disabled = false;
+      });
   });
 }
 
