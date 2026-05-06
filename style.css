@@ -1,9 +1,8 @@
 /* ─────────────────────────────────────────
-   KCS CONSULTANCY — STYLESHEET
-   Design: Premium, Clean, Corporate
+   KCS CONSULTANCY — by Tejas!
    ───────────────────────────────────────── */
 
-/* ── TOKENS ── */
+
 :root {
   --clr-navy:        #0A1628;
   --clr-navy-mid:    #0D1E38;
@@ -973,6 +972,9 @@ color: black;
   display: grid;
   gap: 0.9rem;
   margin-top: 0.25rem;
+}
+.nav.open {
+  height: 900px;
 }
 
 @media (min-width: 520px) {
